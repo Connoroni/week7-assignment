@@ -23,10 +23,17 @@ app.get("/", (req, res) => {
 app.post("/newuser", (req, res) => {
   const userData = req.body;
   console.log("Request body: ", userData);
-  const query = db.query(
-    `INSERT INTO INSERT INTO users (username) VALUES ($1)`,
-    [userData.username]
-  );
+  const query = db.query(`INSERT INTO users (username) VALUES ($1)`, [
+    userData.username,
+  ]);
+  //Credit to Mo for spotting that the query above said `INSERT INTO INSERT INTO users` and that's why I'd been stuck for ages with my data not sending to the database
+});
+
+app.get("/userquery", async (req, res) => {
+  const query = await db.query(`SELECT * FROM users`);
+  await res.json(query.rows);
+  console.log(query.rows);
+  const jsonData = query.rows;
 });
 
 // app.post("/newpost", async (req, res) => {

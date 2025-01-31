@@ -1,15 +1,23 @@
 import { useState } from "react";
+// import { userList } from "../lib/users";
 
 export default function PostForm() {
   // const [username, setUsername] = useState("");
   // const [postTitle, setPostTitle] = useState("");
   // const [img, setImg] = useState("");
+  async function getUsers() {
+    const result = await fetch("http://localhost:8080/userquery");
+    const userList = await result.json();
+    console.log(userList);
+    return userList;
+  }
+  getUsers();
   const [formValues, setFormValues] = useState({
-    username: "",
+    user_id: "",
     postTitle: "",
     img: "",
-    user_id: "",
   });
+  console.log(userList);
 
   function handleChangeFormValues(event) {
     setFormValues({
@@ -37,14 +45,23 @@ export default function PostForm() {
     <>
       <h2>Create your post</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
+        <label htmlFor="user_id">Username:</label>
+        <select name="user_id" id="user_id">
+          {userList.map(function (item) {
+            return (
+              <option key={item.id} value={item.id}>
+                {item.username}
+              </option>
+            );
+          })}
+        </select>
+        {/* <input
           type="text"
           id="username"
           name="username"
           placeholder="Enter a username"
           onChange={handleChangeFormValues}
-        />
+        /> */}
         <label htmlFor="postTitle">Post title:</label>
         <input
           type="text"
