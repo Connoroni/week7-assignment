@@ -1,7 +1,7 @@
 export default function PostForm() {
   return (
     <>
-      <h2>hello</h2>
+      <h2>post form</h2>
     </>
   );
 }

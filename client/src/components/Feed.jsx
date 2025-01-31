@@ -1,7 +1,7 @@
 export default function Feed() {
   return (
     <>
-      <h2>hello</h2>
+      <h2>this is the feed</h2>
     </>
   );
 }
