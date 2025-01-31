@@ -31,4 +31,26 @@
 // INSERT INTO comments (comment_text, user_id, post_id)
 // VALUES ('That is such a cute orangutan!', 1, 1);
 
+// INSERT INTO comments (comment_text, user_id, post_id)
+// VALUES ('Lovely photo, my dude!', 1, 1);
+
+// INSERT INTO comments (comment_text, user_id, post_id)
+// VALUES ('I like monkeys!', 1, 1);
+
+// INSERT INTO comments (comment_text, user_id, post_id)
+// VALUES ('Umm actually, orangutans are apes not monkeys.!', 1, 1);
+
 //! Selecting
+
+//? -- First one is just practice
+// SELECT posts.post_title, posts.timestamp, posts.img, comments.comment_text FROM posts
+// JOIN comments ON posts.id = comments.post_id;
+
+//? -- Selecting all posts by a user (this should appear on user profile)
+// SELECT users.username, posts.post_title, posts.timestamp, posts.img FROM users
+// JOIN posts ON users.id = posts.user_id;
+
+//? -- Selecting posts, comments, and username to show on feed
+// SELECT users.username, posts.post_title, posts.timestamp, posts.img, comments.comment_text FROM users
+// JOIN posts ON users.id = posts.user_id
+// JOIN comments ON posts.id = comments.post_id;
