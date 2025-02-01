@@ -1,23 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { userList } from "../lib/users";
 
 export default function PostForm() {
   // const [username, setUsername] = useState("");
   // const [postTitle, setPostTitle] = useState("");
   // const [img, setImg] = useState("");
-  async function getUsers() {
-    const result = await fetch("http://localhost:8080/userquery");
-    const userList = await result.json();
-    console.log(userList);
-    return userList;
-  }
-  getUsers();
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    async function getUsers() {
+      const result = await fetch("http://localhost:8080/userquery");
+      const jsonResult = await result.json();
+      setUserList(jsonResult);
+      // console.log(userList);
+    }
+    getUsers();
+  }, []);
   const [formValues, setFormValues] = useState({
     user_id: "",
     postTitle: "",
     img: "",
   });
-  console.log(userList);
+  // console.log(userList);
 
   function handleChangeFormValues(event) {
     setFormValues({
@@ -39,6 +43,11 @@ export default function PostForm() {
       },
       body: JSON.stringify({ formValues }),
     });
+    setFormValues({
+      user_id: "",
+      postTitle: "",
+      img: "",
+    });
   }
 
   return (
@@ -49,7 +58,7 @@ export default function PostForm() {
         <select name="user_id" id="user_id">
           {userList.map(function (item) {
             return (
-              <option key={item.id} value={item.id}>
+              <option value={item.id} key={item.username}>
                 {item.username}
               </option>
             );
