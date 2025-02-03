@@ -9,7 +9,9 @@ export default function PostForm() {
 
   useEffect(() => {
     async function getUsers() {
-      const result = await fetch("http://localhost:8080/userquery");
+      const result = await fetch(
+        "https://dashboard.render.com/web/srv-cufvmp23esus73e5hpq0/userquery"
+      );
       const jsonResult = await result.json();
       setUserList(jsonResult);
       // console.log(userList);
@@ -36,7 +38,7 @@ export default function PostForm() {
     // fetch to send just username
     // fetch to select user_id that matches submitted username
     // add user_id to formValues object
-    fetch("http://localhost:8080/newpost", {
+    fetch("https://dashboard.render.com/web/srv-cufvmp23esus73e5hpq0/newpost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
