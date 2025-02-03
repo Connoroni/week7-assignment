@@ -20,7 +20,34 @@ app.get("/", (req, res) => {
   res.json("Test on root");
 });
 
-app.post("/test-post", async (req, res) => {
+app.post("/newuser", (req, res) => {
+  const userData = req.body;
+  console.log("Request body: ", userData);
+  const query = db.query(`INSERT INTO users (username) VALUES ($1)`, [
+    userData.username,
+  ]);
+  //Credit to Mo for spotting that the query above said `INSERT INTO INSERT INTO users` and that's why I'd been stuck for ages with my data not sending to the database
+});
+
+app.get("/userquery", async (req, res) => {
+  const query = await db.query(`SELECT * FROM users`);
+  await res.json(query.rows);
+  console.log(query.rows);
+  const jsonData = query.rows;
+});
+
+// app.post("/newpost", async (req, res) => {
+//   const data = req.body;
+//   console.log("Request body:", data);
+//   const query = await db.query(
+//     `INSERT INTO posts (post_title, timestamp, img, user_id) VALUES ($1, current_timestamp, $2, $3)`,
+//     [data.username, data.postTitle, data.img]
+//   );
+// });
+
+// route to select all data from users table
+
+app.post("/feed", async (req, res) => {
   const query = await db.query(
     `SELECT users.username, posts.post_title, posts.timestamp, posts.img, comments.comment_text FROM users
     JOIN posts ON users.id = posts.user_id
