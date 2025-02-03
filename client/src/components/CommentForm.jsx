@@ -16,7 +16,7 @@ export default function CommentForm() {
     event.preventDefault();
     console.log(formValues);
 
-    fetch("http://localhost:8080/newpost", {
+    fetch("https://dashboard.render.com/web/srv-cufvmp23esus73e5hpq0/newpost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
