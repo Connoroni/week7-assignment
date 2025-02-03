@@ -55,22 +55,35 @@ export default function PostForm() {
       <h2>Create your post</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="user_id">Username:</label>
-        <select name="user_id" id="user_id">
+        <select
+          name="user_id"
+          id="user_id"
+          value={formValues.user_id}
+          onChange={handleChangeFormValues}
+        >
           {userList.map(function (item) {
             return (
-              <option value={item.id} key={item.username}>
+              <option
+                value={item.id}
+                key={item.username}
+                onChange={handleChangeFormValues}
+              >
                 {item.username}
               </option>
             );
           })}
+          {/* {async () => {
+            await Promise.all(
+              userList.map(function (item) {
+                return (
+                  <option value={item.id} key={item.username}>
+                    {item.username}
+                  </option>
+                );
+              })
+            );
+          }} */}
         </select>
-        {/* <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Enter a username"
-          onChange={handleChangeFormValues}
-        /> */}
         <label htmlFor="postTitle">Post title:</label>
         <input
           type="text"
