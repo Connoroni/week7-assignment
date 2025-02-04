@@ -19,4 +19,10 @@
 // INSERT INTO comments2 (username, timestamp, comment_text, post_id)
 // VALUES ('U. R. Rong', current_timestamp, 'Umm actually, orangutans are apes not monkeys...', 1);
 
-//! Selecting
+//! Select queries
+//? Select all posts and comments for the feed
+// SELECT posts2.username, posts2.post_title, posts2.timestamp, posts2.img, comments2.comment_text, comments2.timestamp FROM posts2
+// JOIN comments2 ON posts2.id = comments2.post_id;
+
+//? Select all comments on an individual post
+// Same as above but need to add 'WHERE comments2.post_id = $1', [post id from dynamic params] in the request.body
